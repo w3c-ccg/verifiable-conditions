@@ -6,15 +6,11 @@ Comments regarding this document are welcome. Please file issues and PRs directl
 Editors:
 - Jack Tanner, Blockchain and SSI Developer | Gimly jack@gimly.io
 
-# Abstract
-
-// TODO
-
 # Introduction
 
-// TODO
-DID 
-DID verificationMethod type
+VerifiableCondition is a new type of verification method for DID Documents. It can be used to express complex conditions and additional meta data about verification methods. It can be used to combine verification methods together to form conjugated conditions such as logical operations &&, thresholds, weighted thresholds, relationships and a delegation to external verification methods.
+
+This new type has been created from discussions during the [Decentralized Identity Foundation](https://identity.foundation)'s ID working group sessions. The need for this type has arisen from the current creation of the EOSIO DID method by [Gimly](https://gimly.io). The type is designed to cover several other important use cases requiring similar conditional logic.
 
 Prior work:
 - [Verifiable Conditions planning doc](https://docs.google.com/document/d/1hxEMQxfNuB6Elmd6V-9bEt0kZqSx-DULycn6CjOpMYs) - several VerifiableCondition types have not been added to this draft, see conversation and if you think they are important please submit an issue or PR to add
@@ -31,7 +27,7 @@ Support for account and key models of the following protocols:
 - EOSIO: [Accounts And Permissions](https://developers.eos.io/welcome/latest/protocol-guides/accounts_and_permissions)
 - Hyperledger Fabric: [Endorsement policies](https://hyperledger-fabric.readthedocs.io/en/latest/developapps/endorsementpolicies.html?highlight=endorsement%20policy)
 - Ripple and BigchainDB: [Composable cryptographic conditionals](https://github.com/rfcs/crypto-conditions)
-- KERI: [keripy/blob/master/tests/core/test_coring.py](https://github.com/decentralized-identity/keripy/blob/master/tests/core/test_coring.py#L2523)
+- KERI: [KERI Thresholds](https://github.com/decentralized-identity/keripy/blob/1b6d25a0ada87a65c6a978336c3a1a273c2e53a6/src/keri/core/coring.py#L3151)
 - Hyperledger Indy: [Indy DID Method](https://hackmd.io/@icZC4epNSnqBbYE0hJYseA/S1eUS2BQw)
 
 # The VerifiableCondition Type
@@ -45,7 +41,7 @@ Support for account and key models of the following protocols:
 }
 ```
 
-// TODO
+The type property of a verificationMethod which includes "VerifiableCondition" is a verifiable. A verifiable type MUST also specify at least one or more types which specify how the condition is fulfilled.
 
 The “verificationMethod” property is a singular or array value of other verification methods. These can be any valid type including other VerifiableCondition types. In this way, a recursive structure of infinite complexity can be expressed about the cryptographic material required.
 
@@ -82,7 +78,6 @@ This would check that the signatures match AND( OR( #1-1-1, #1-1-2), #1-2). Note
     }]
 }
 ```
-
 
 # Subtypes of VerifiableCondition
 
@@ -164,8 +159,3 @@ Fulfilled if the verificationMethod found by dereferencing the DID URL “delega
 Has not fulfillment requirements.
 
 Expresses a relationship between different verificationMethods. One of the properties "parentIdUrl", "childIdUrl" or "siblingIdUrl" MUST be present. Each property can be a DID URL or an array of DID URLs.
-
-# Privacy Considerations
-
-# Security Considerations
-
