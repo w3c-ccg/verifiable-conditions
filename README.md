@@ -5,6 +5,7 @@ Comments regarding this document are welcome. Please file issues and PRs directl
 
 Editors:
 - Jack Tanner, Blockchain and SSI Developer | Gimly jack@gimly.io
+- Markus Sabadello | Danube Tech markus@danubetech.com
 
 # Introduction
 
