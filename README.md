@@ -50,6 +50,8 @@ The “verificationMethod” can use a [relative DID URL](https://w3c.github.io/
 ## Example
 This would check that the signatures match AND( OR( #1-1-1, #1-1-2), #1-2). Note the different types.
 
+TODO show example of a json-ld proof that corresponds to this verification method.
+
 ```json
 {
     "id": "did:example:123#1",
@@ -94,6 +96,8 @@ This would check that the signatures match AND( OR( #1-1-1, #1-1-2), #1-2). Note
 Fulfilled if all of the verificationMethods provided are fulfilled.
 
 Note: this subtype can be expressed through a Threshold subtype by setting the “threshold” property to the the number of verificationMethods.
+
+TODO VerificationMethodOr
 
 ## Threshold
 ```json
@@ -144,6 +148,8 @@ Fulfilled if the sum of the weights of the verificationMethods that are fulfille
 
 Fulfilled if the verificationMethod found by dereferencing the DID URL “delegatedIdUrl” is fulfilled. The dereferenced DID document MUST contain a verificationMethod found using the DID URL. The dereferenced DID document MUST NOT contain multiple verificationMethods found using the DID URL.
 
+DISCUSSION: is this needed? can just use URI?
+
 ## Relationship
 ```json
 {
@@ -159,3 +165,5 @@ Fulfilled if the verificationMethod found by dereferencing the DID URL “delega
 Has not fulfillment requirements.
 
 Expresses a relationship between different verificationMethods. One of the properties "parentIdUrl", "childIdUrl" or "siblingIdUrl" MUST be present. Each property can be a DID URL or an array of DID URLs.
+
+TODO: example HD keys?, semantics -> what does the relationship mean. what is the implication.
