@@ -232,15 +232,15 @@ Fulfilled if the verificationMethod found by dereferencing the DID URL “delega
 
 An alternative shorthand to this type is to use a DID URI in place that points to a different DID, this can be interpreted as a VerifiableConditionDelegated type. e.g. equivalent verificationMethods:
 ```json
-"did:example456"
+"did:example:456#key-2"
 ```
 and
 ```json
 {
-    "id": "did:example:123#10",
+    "id": "did:example:123#2",
     "controller": "did:example:123",
     "type": ["VerifiableCondition", "VerifiableConditionDelegated"],
-    "delegatedIdUrl": "did:example:456"
+    "delegatedIdUrl": "did:example:456#key-2"
 }
 ```
 
