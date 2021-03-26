@@ -5,6 +5,7 @@ Comments regarding this document are welcome. Please file issues and PRs directl
 
 Editors:
 - Jack Tanner, Blockchain and SSI Developer | Gimly jack@gimly.io
+- Markus Sabadello | Danube Tech markus@danubetech.com
 
 # Introduction
 
@@ -165,5 +166,7 @@ DISCUSSION: is this needed? can just use URI?
 Has not fulfillment requirements.
 
 Expresses a relationship between different verificationMethods. One of the properties "parentIdUrl", "childIdUrl" or "siblingIdUrl" MUST be present. Each property can be a DID URL or an array of DID URLs.
+
+
 
 TODO: example HD keys?, semantics -> what does the relationship mean. what is the implication.
