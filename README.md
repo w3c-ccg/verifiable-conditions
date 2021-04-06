@@ -4,6 +4,7 @@ This document is not a W3C Standard nor is it on the W3C Standards Track. This i
 Comments regarding this document are welcome. Please file issues and PRs directly on Github.
 
 Editors:
+- Caspar Roelofs, Founder/Director | Gimly caspar@gimly.io
 - Jack Tanner, Blockchain and SSI Developer | Gimly jack@gimly.io
 - Markus Sabadello | Danube Tech markus@danubetech.com
 
