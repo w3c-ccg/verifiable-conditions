@@ -41,7 +41,7 @@ Support for account and key models of the following protocols:
     "id": "did:example:123#owner",
     "controller": "did:example:123",
     "type": ["VerifiableCondition", "VerifiableConditionAnd"],
-    "verificationMethod": {},
+    "verificationMethod": [],
 }
 ```
 
@@ -205,13 +205,13 @@ Note: this subtype can be expressed through a WeightedThreshold subtype by setti
     "type": ["VerifiableCondition", "VerifiableConditionWeightedThreshold"],
     "threshold": 3,
     "verificationMethod": [{
-        "verificationMethod": {},
+        "verificationMethod": [],
         "weight": 2
     }, {
-        "verificationMethod": {},
+        "verificationMethod": [],
         "weight": 2
     }, {
-        "verificationMethod": {},
+        "verificationMethod": [],
         "weight": 1
     }]
 }
