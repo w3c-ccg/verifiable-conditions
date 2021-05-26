@@ -4,6 +4,7 @@ This document is not a W3C Standard nor is it on the W3C Standards Track. This i
 Comments regarding this document are welcome. Please file issues and PRs directly on Github.
 
 Editors:
+- Caspar Roelofs, Founder/Director | Gimly caspar@gimly.io
 - Jack Tanner, Blockchain and SSI Developer | Gimly jack@gimly.io
 - Markus Sabadello | Danube Tech markus@danubetech.com
 
@@ -40,7 +41,7 @@ Support for account and key models of the following protocols:
     "id": "did:example:123#owner",
     "controller": "did:example:123",
     "type": ["VerifiableCondition2021", "VerifiableCondition2021And"],
-    "verificationMethod": {},
+    "verificationMethod": [],
 }
 ```
 
@@ -204,13 +205,13 @@ Note: this subtype can be expressed through a WeightedThreshold subtype by setti
     "type": ["VerifiableCondition2021", "VerifiableCondition2021WeightedThreshold"],
     "threshold": 3,
     "verificationMethod": [{
-        "verificationMethod": {},
+        "verificationMethod": [],
         "weight": 2
     }, {
-        "verificationMethod": {},
+        "verificationMethod": [],
         "weight": 2
     }, {
-        "verificationMethod": {},
+        "verificationMethod": [],
         "weight": 1
     }]
 }
