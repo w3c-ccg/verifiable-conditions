@@ -7,7 +7,7 @@ Editors:
 - Jack Tanner, Blockchain and SSI Developer | Gimly jack@gimly.io
 - Markus Sabadello | Danube Tech markus@danubetech.com
 
-TODO: turn into a Respect page and host https://respec.org/docs
+TODO: turn into a Re-spec page and host https://respec.org/docs
 
 # Introduction
 
@@ -39,12 +39,12 @@ Support for account and key models of the following protocols:
 {
     "id": "did:example:123#owner",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionAnd"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021And"],
     "verificationMethod": {},
 }
 ```
 
-The type property of a verificationMethod which includes "VerifiableCondition" is a verifiable. A verifiable type MUST also specify at least one or more types which specify how the condition is fulfilled.
+The type property of a verificationMethod which includes "VerifiableCondition2021" is a verifiable condition. A verifiable type MUST also specify at least one or more types which specify how the condition is fulfilled.
 
 The “verificationMethod” property is a singular or array value of other verification methods. These can be any valid type including other VerifiableCondition types. In this way, a recursive structure of infinite complexity can be expressed about the cryptographic material required.
 
@@ -64,11 +64,11 @@ The following DID shows a verificationMethod #1 which requires proofs to match t
         {
             "id": "did:example:123#1",
             "controller": "did:example:123",
-            "type": ["VerifiableCondition", "VerifiableConditionAnd"],
+            "type": ["VerifiableCondition2021", "VerifiableCondition2021And"],
             "verificationMethod": [{
                 "id": "did:example:123#1-1",
                 "controller": "did:example:123",
-                "type": ["VerifiableCondition", "VerifiableConditionOr"],
+                "type": ["VerifiableCondition2021", "VerifiableCondition2021Or"],
                 "verificationMethod": [{
                     "id": "did:example:123#1-1-1",
                     "controller": "did:example:123",
@@ -151,14 +151,14 @@ This is an example of a [verifiable presentation](https://www.w3.org/TR/vc-data-
 }
 ```
 
-# Subtypes of VerifiableCondition
+# Subtypes of VerifiableCondition2021
 
 ## And
 ```json
 {
     "id": "did:example:123#1",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionAnd"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021And"],
     "verificationMethod": []
 }
 ```
@@ -172,7 +172,7 @@ Note: this subtype can be expressed through a Threshold subtype by setting the �
 {
     "id": "did:example:123#1",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionOr"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021Or"],
     "verificationMethod": []
 }
 ```
@@ -186,7 +186,7 @@ Note: this subtype can be expressed through a Threshold subtype by setting the �
 {
     "id": "did:example:123#4",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionThreshold"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021Threshold"],
     "threshold": 3,
     "verificationMethod": [],
 }
@@ -201,7 +201,7 @@ Note: this subtype can be expressed through a WeightedThreshold subtype by setti
 {
     "id": "did:example:123#5",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionWeightedThreshold"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021WeightedThreshold"],
     "threshold": 3,
     "verificationMethod": [{
         "verificationMethod": {},
@@ -223,14 +223,14 @@ Fulfilled if the sum of the weights of the verificationMethods that are fulfille
 {
     "id": "did:example:123#10",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionDelegated"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021Delegated"],
     "delegatedIdUrl": ""
 }
 ```
 
 Fulfilled if the verificationMethod found by dereferencing the DID URL “delegatedIdUrl” is fulfilled. The dereferenced DID document MUST contain a verificationMethod found using the DID URL. The dereferenced DID document MUST NOT contain multiple verificationMethods found using the DID URL.
 
-An alternative shorthand to this type is to use a DID URI in place that points to a different DID, this can be interpreted as a VerifiableConditionDelegated type. e.g. equivalent verificationMethods:
+An alternative shorthand to this type is to use a DID URI in place that points to a different DID, this can be interpreted as a VerifiableCondition2021Delegated type. e.g. equivalent verificationMethods:
 ```json
 "did:example:456#key-2"
 ```
@@ -239,7 +239,7 @@ and
 {
     "id": "did:example:123#2",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionDelegated"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021Delegated"],
     "delegatedIdUrl": "did:example:456#key-2"
 }
 ```
@@ -249,7 +249,7 @@ and
 {
     "id": "did:example:123#10",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition", "VerifiableConditionRelationship"],
+    "type": ["VerifiableCondition2021", "VerifiableCondition2021Relationship"],
     "parentIdUrl": [],
     "childIdUrl": [],
     "siblingIdUrl": [],
