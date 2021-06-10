@@ -36,23 +36,35 @@ Support for account and key models of the following protocols:
 
 # The VerifiableCondition Type
 
+A illistrative object of VerifiableCondition type showing the potential properties of the object. Note that not all these properties would exist for this to be a valid object.
+
 ```json
 {
     "id": "did:example:123#owner",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021And"],
-    "verificationMethod": [],
+    "type": "VerifiableCondition2021",
+    "threshold": 0,
+    "conditionAnd": [],
+    "conditionOr": [],
+    "conditionThreshold": [],
+    "conditionWeightedThreshold": [],
+    "conditionDelegated": "",
+    "relationshipParent": [],
+    "relationshipChild": [],
+    "relationshipSibling": []
 }
 ```
 
-The type property of a verificationMethod which includes "VerifiableCondition2021" is a verifiable condition. A verifiable type MUST also specify at least one or more types which specify how the condition is fulfilled.
+A verificationMethod which has a "VerifiableCondition2021" type is a verifiable condition. A verifiable condition type MUST specify one and only one fulfillment condition (And, Or, Threshold, WeightedThreshold and Delegated) by have a corresponding object property for that condition. A verifiable condition MAY specify one or more relationships (Parent, Child, Sibling) by having a corresponding object property for that relationship.
 
-The “verificationMethod” property is a singular or array value of other verification methods. These can be any valid type including other VerifiableCondition types. In this way, a recursive structure of infinite complexity can be expressed about the cryptographic material required.
+The And, Or, Threshold and WeightedThreshold fulfillment condition MUST be either an array of verification methods, or [relative DID URL](https://w3c.github.io/did-core/#relative-did-urls) to a verification method on the same DID Document. These verification methods can be of any type, including VerifiableCondition types, creating a recursive structure able to express infinite conditional logic complexity about the cryptographic material required.
 
-The “verificationMethod” can use a [relative DID URL](https://w3c.github.io/did-core/#relative-did-urls) to link to other “verificationMethod”s to avoid duplication in the same DID Document.
+The Delegated fulfillment condition MUST be a DID URL string.
+
+The relationships MUST be an array of DID URLs.
 
 ## Example
-The following DID shows a verificationMethod #1 which requires proofs to match the condition of AND( OR( #1-1-1, #1-1-2), #1-2) to be fulfilled. Note the different types possible.
+The following DID shows a verificationMethod #1 which requires proofs to match the condition of AND( OR( #1-1-1, #1-1-2), #1-2) to be fulfilled. Note different key types are used as well.
 
 ```json
 {
@@ -61,16 +73,17 @@ The following DID shows a verificationMethod #1 which requires proofs to match t
          "https://example.com/did/verifiable-conditions/v1"
      ],
     "id": "did:example:123",
+    "type": "VerifiableCondition2021",
     "verificationMethod": [
         {
             "id": "did:example:123#1",
             "controller": "did:example:123",
-            "type": ["VerifiableCondition2021", "VerifiableCondition2021And"],
-            "verificationMethod": [{
+            "type": "VerifiableCondition2021",
+            "conditionAnd": [{
                 "id": "did:example:123#1-1",
                 "controller": "did:example:123",
-                "type": ["VerifiableCondition2021", "VerifiableCondition2021Or"],
-                "verificationMethod": [{
+                "type": "VerifiableCondition2021",
+                "conditionOr": [{
                     "id": "did:example:123#1-1-1",
                     "controller": "did:example:123",
                     "type": "EcdsaSecp256k1VerificationKey2019",
@@ -159,8 +172,8 @@ This is an example of a [verifiable presentation](https://www.w3.org/TR/vc-data-
 {
     "id": "did:example:123#1",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021And"],
-    "verificationMethod": []
+    "type": "VerifiableCondition2021",
+    "conditionAnd": []
 }
 ```
 
@@ -173,8 +186,8 @@ Note: this subtype can be expressed through a Threshold subtype by setting the �
 {
     "id": "did:example:123#1",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021Or"],
-    "verificationMethod": []
+    "type": "VerifiableCondition2021",
+    "conditionOr": []
 }
 ```
 
@@ -187,9 +200,9 @@ Note: this subtype can be expressed through a Threshold subtype by setting the �
 {
     "id": "did:example:123#4",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021Threshold"],
+    "type": "VerifiableCondition2021",
     "threshold": 3,
-    "verificationMethod": [],
+    "conditionThreshold": [],
 }
 ```
 
@@ -202,16 +215,16 @@ Note: this subtype can be expressed through a WeightedThreshold subtype by setti
 {
     "id": "did:example:123#5",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021WeightedThreshold"],
+    "type": "VerifiableCondition2021",
     "threshold": 3,
-    "verificationMethod": [{
-        "verificationMethod": [],
+    "conditionWeightedThreshold": [{
+        "condition": [],
         "weight": 2
     }, {
-        "verificationMethod": [],
+        "condition": [],
         "weight": 2
     }, {
-        "verificationMethod": [],
+        "condition": [],
         "weight": 1
     }]
 }
@@ -224,48 +237,33 @@ Fulfilled if the sum of the weights of the verificationMethods that are fulfille
 {
     "id": "did:example:123#10",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021Delegated"],
-    "delegatedIdUrl": ""
+    "type": "VerifiableCondition2021",
+    "conditionDelegated": ""
 }
 ```
 
-Fulfilled if the verificationMethod found by dereferencing the DID URL “delegatedIdUrl” is fulfilled. The dereferenced DID document MUST contain a verificationMethod found using the DID URL. The dereferenced DID document MUST NOT contain multiple verificationMethods found using the DID URL.
+Fulfilled if the verificationMethod found by dereferencing the DID URL "conditionDelegated" is fulfilled. The dereferenced DID document MUST contain a verificationMethod found using the DID URL. The dereferenced DID document MUST NOT contain multiple verificationMethods found using the DID URL.
 
-An alternative shorthand to this type is to use a DID URI in place that points to a different DID, this can be interpreted as a VerifiableCondition2021Delegated type. e.g. equivalent verificationMethods:
-```json
-"did:example:456#key-2"
-```
-and
-```json
-{
-    "id": "did:example:123#2",
-    "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021Delegated"],
-    "delegatedIdUrl": "did:example:456#key-2"
-}
-```
-
-## Relationship
+## Relationships
 ```json
 {
     "id": "did:example:123#10",
     "controller": "did:example:123",
-    "type": ["VerifiableCondition2021", "VerifiableCondition2021Relationship"],
-    "parentIdUrl": [],
-    "childIdUrl": [],
-    "siblingIdUrl": [],
+    "type": "VerifiableCondition2021",
+    "relationshipParent": [],
+    "relationshipChild": [],
+    "relationshipSibling": [],
 }
 ```
 
 Has no fulfillment requirements.
 
-Expresses a relationship between different verificationMethods. One of the properties "parentIdUrl", "childIdUrl" or "siblingIdUrl" MUST be present. Each property can be a DID URL or an array of DID URLs.
+If one of these properties exist, it MUST be an array of DID URLs.
 
-ParentIdUrl expresses which verificationMethods are a parent to this one.
-ChildIdUrl expresses which verificationMethods are a child to this one.
-SiblingIdUrl expresses which verificationMethods are a sibling to this one.
-
-This verification Method type is useful to express information for wallet mangement and for proofs.
+This verificationMethod type is useful to express information for wallet mangement and for proofs.
+- "relationshipParent" expresses which verificationMethod(s) are a parent to this one.
+- "relationshipChild" expresses which verificationMethod(s) are a child to this one.
+- "relationshipSibling" expresses which verificationMethod(s) are a sibling to this one.
 
 For [Hierarchical Deterministic (HD) Wallets](https://www.ledger.com/academy/crypto/what-are-hierarchical-deterministic-hd-wallets) or other types of heirachial wallets such as EOSIO, the relationship between different keys in the wallets is required so that the wallets may correctly update its key hierarchy. For example, a parent key is required to update child keys on an EOSIO blockchain.
 
