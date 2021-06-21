@@ -32,7 +32,10 @@
           "@type": "@id"
         },
 
-        "threshold": "https://w3c-ccg.github.io/verifiable-conditions#threshold",
+        "threshold": {
+          "@id": "https://w3c-ccg.github.io/verifiable-conditions#threshold",
+          "@type": "xsd:nonNegativeInteger"
+        },
 
         "relationshipParent": {
           "@id": "https://w3c-ccg.github.io/verifiable-conditions#relationshipParent",
