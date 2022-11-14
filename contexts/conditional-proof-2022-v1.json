@@ -1,0 +1,53 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@protected": true,
+    "id": "@id",
+    "type": "@type",
+
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "ConditionalProof2022": {
+      "@id": "https://w3c-ccg.github.io/conditional-proof#ConditionalProof2022",
+
+      "@context": {
+        "conditionAnd": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#conditionAnd",
+          "@type": "@id"
+        },
+        "conditionOr": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#conditionOr",
+          "@type": "@id"
+        },
+        "conditionThreshold": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#conditionThreshold",
+          "@type": "@id"
+        },
+        "conditionWeightedThreshold": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#conditionWeightedThreshold",
+          "@type": "@id"
+        },
+        "conditionDelegated": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#conditionDelegated",
+          "@type": "@id"
+        },
+        "threshold": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#threshold",
+          "@type": "xsd:nonNegativeInteger"
+        },
+        "relationshipParent": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#relationshipParent",
+          "@type": "@id"
+        },
+        "relationshipChild": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#relationshipChild",
+          "@type": "@id"
+        },
+        "relationshipSibling": {
+          "@id": "https://w3c-ccg.github.io/conditional-proof#relationshipSibling",
+          "@type": "@id"
+        }
+      }
+    }
+  }
+}

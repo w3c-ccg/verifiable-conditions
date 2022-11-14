@@ -5,19 +5,17 @@ Comments regarding this document are welcome. Please file issues and PRs directl
 
 Editors:
 - Caspar Roelofs, Founder/Director | Gimly caspar@gimly.io
-- Jack Tanner, Blockchain and SSI Developer | Gimly jack@gimly.io
+- Jack Tanner, Blockchain and SSI Developer | Gimly jack@tonomy.foundation
 - Markus Sabadello | Danube Tech markus@danubetech.com
-
-TODO: turn into a Re-spec page and host https://respec.org/docs
 
 # Introduction
 
-VerifiableCondition is a new type of verification method for DID Documents. It can be used to express complex conditions and additional meta data about verification methods. It can be used to combine verification methods together to form conjugated conditions such as logical operations &&, thresholds, weighted thresholds, relationships and a delegation to external verification methods.
+ConditionalProof is a new type of verification method for DID Documents. It can be used to express complex conditions and additional meta data about verification methods. It can be used to combine verification methods together to form conjugated conditions such as logical operations &&, thresholds, weighted thresholds, relationships and a delegation to external verification methods.
 
 This new type has been created from discussions during the [Decentralized Identity Foundation](https://identity.foundation)'s ID working group sessions. The need for this type has arisen from the current creation of the EOSIO DID method by [Gimly](https://gimly.io). The type is designed to cover several other important use cases requiring similar conditional logic.
 
 Prior work:
-- [Verifiable Conditions planning doc](https://docs.google.com/document/d/1hxEMQxfNuB6Elmd6V-9bEt0kZqSx-DULycn6CjOpMYs) - several VerifiableCondition types have not been added to this draft, see conversation and if you think they are important please submit an issue or PR to add
+- [Conditional Proof planning doc](https://docs.google.com/document/d/1hxEMQxfNuB6Elmd6V-9bEt0kZqSx-DULycn6CjOpMYs) - several ConditionalProof types have not been added to this draft, see conversation and if you think they are important please submit an issue or PR to add
 - [DID core - multisig and delegated use case](https://docs.google.com/presentation/d/1vrmdOnN1tiE54e8h7HyegkJUGyrBUITVFNsAVedUwTE)
 
 ## Goals
@@ -34,15 +32,15 @@ Support for account and key models of the following protocols:
 - KERI: [KERI Thresholds](https://github.com/decentralized-identity/keripy/blob/1b6d25a0ada87a65c6a978336c3a1a273c2e53a6/src/keri/core/coring.py#L3151)
 - Hyperledger Indy: [Indy DID Method](https://hackmd.io/@icZC4epNSnqBbYE0hJYseA/S1eUS2BQw)
 
-# The VerifiableCondition Type
+# The ConditionalProof Type
 
-A illistrative object of VerifiableCondition type showing the potential properties of the object. Note that not all these properties would exist for this to be a valid object.
+A illistrative object of ConditionalProof type showing the potential properties of the object. Note that not all these properties would exist for this to be a valid object.
 
 ```json
 {
     "id": "did:example:123#owner",
     "controller": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "threshold": 0,
     "conditionAnd": [],
     "conditionOr": [],
@@ -55,9 +53,9 @@ A illistrative object of VerifiableCondition type showing the potential properti
 }
 ```
 
-A verificationMethod which has a "VerifiableCondition2021" type is a verifiable condition. A verifiable condition type MUST specify one and only one fulfillment condition (And, Or, Threshold, WeightedThreshold and Delegated) by have a corresponding object property for that condition. A verifiable condition MAY specify one or more relationships (Parent, Child, Sibling) by having a corresponding object property for that relationship.
+A verificationMethod which has a "ConditionalProof2022" type is a conditional proof. A conditional proof type MUST specify one and only one fulfillment condition (And, Or, Threshold, WeightedThreshold and Delegated) by have a corresponding object property for that condition. A conditional proof MAY specify one or more relationships (Parent, Child, Sibling) by having a corresponding object property for that relationship.
 
-The And, Or, Threshold and WeightedThreshold fulfillment condition MUST be either an array of verification methods, or [relative DID URL](https://w3c.github.io/did-core/#relative-did-urls) to a verification method on the same DID Document. These verification methods can be of any type, including VerifiableCondition types, creating a recursive structure able to express infinite conditional logic complexity about the cryptographic material required.
+The And, Or, Threshold and WeightedThreshold fulfillment condition MUST be either an array of verification methods, or [relative DID URL](https://w3c.github.io/did-core/#relative-did-urls) to a verification method on the same DID Document. These verification methods can be of any type, including Conditional Proof types, creating a recursive structure able to express infinite conditional logic complexity about the cryptographic material required.
 
 The Delegated fulfillment condition MUST be a DID URL string.
 
@@ -70,19 +68,19 @@ The following DID shows a verificationMethod #1 which requires proofs to match t
 {
      "@context": [
          "https://www.w3.org/ns/did/v1",
-         "https://example.com/did/verifiable-conditions/v1"
+         "https://example.com/did/conditions-proof/v1"
      ],
     "id": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "verificationMethod": [
         {
             "id": "did:example:123#1",
             "controller": "did:example:123",
-            "type": "VerifiableCondition2021",
+            "type": "ConditionalProof2022",
             "conditionAnd": [{
                 "id": "did:example:123#1-1",
                 "controller": "did:example:123",
-                "type": "VerifiableCondition2021",
+                "type": "ConditionalProof2022",
                 "conditionOr": [{
                     "id": "did:example:123#1-1-1",
                     "controller": "did:example:123",
@@ -165,14 +163,14 @@ This is an example of a [verifiable presentation](https://www.w3.org/TR/vc-data-
 }
 ```
 
-# Subtypes of VerifiableCondition2021
+# Subtypes of ConditionalProof2022
 
 ## And
 ```json
 {
     "id": "did:example:123#1",
     "controller": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "conditionAnd": []
 }
 ```
@@ -186,7 +184,7 @@ Note: this subtype can be expressed through a Threshold subtype by setting the â
 {
     "id": "did:example:123#1",
     "controller": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "conditionOr": []
 }
 ```
@@ -200,7 +198,7 @@ Note: this subtype can be expressed through a Threshold subtype by setting the â
 {
     "id": "did:example:123#4",
     "controller": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "threshold": 3,
     "conditionThreshold": [],
 }
@@ -215,7 +213,7 @@ Note: this subtype can be expressed through a WeightedThreshold subtype by setti
 {
     "id": "did:example:123#5",
     "controller": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "threshold": 3,
     "conditionWeightedThreshold": [{
         "condition": [],
@@ -237,7 +235,7 @@ Fulfilled if the sum of the weights of the verificationMethods that are fulfille
 {
     "id": "did:example:123#10",
     "controller": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "conditionDelegated": ""
 }
 ```
@@ -249,7 +247,7 @@ Fulfilled if the verificationMethod found by dereferencing the DID URL "conditio
 {
     "id": "did:example:123#10",
     "controller": "did:example:123",
-    "type": "VerifiableCondition2021",
+    "type": "ConditionalProof2022",
     "relationshipParent": [],
     "relationshipChild": [],
     "relationshipSibling": [],
