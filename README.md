@@ -5,7 +5,7 @@ Comments regarding this document are welcome. Please file issues and PRs directl
 
 Editors:
 - Caspar Roelofs, Founder/Director | Gimly caspar@gimly.io
-- Jack Tanner, Blockchain and SSI Developer | Gimly jack@tonomy.foundation
+- Jack Tanner, Blockchain and SSI Developer | Tonomy jack@tonomy.foundation
 - Markus Sabadello | Danube Tech markus@danubetech.com
 
 # Introduction
@@ -31,6 +31,12 @@ Support for account and key models of the following protocols:
 - Ripple and BigchainDB: [Composable cryptographic conditionals](https://github.com/rfcs/crypto-conditions)
 - KERI: [KERI Thresholds](https://github.com/decentralized-identity/keripy/blob/1b6d25a0ada87a65c6a978336c3a1a273c2e53a6/src/keri/core/coring.py#L3151)
 - Hyperledger Indy: [Indy DID Method](https://hackmd.io/@icZC4epNSnqBbYE0hJYseA/S1eUS2BQw)
+
+
+## Known Implementations
+
+- [Antelope DID](https://github.com/Tonomy-Foundation/antelope-did)
+- [did-jwt-vc](https://github.com/Tonomy-Foundation/did-jwt-vc)
 
 # The ConditionalProof Type
 
