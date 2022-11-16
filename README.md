@@ -222,13 +222,13 @@ Note: this subtype can be expressed through a WeightedThreshold subtype by setti
     "type": "ConditionalProof2022",
     "threshold": 3,
     "conditionWeightedThreshold": [{
-        "condition": [],
+        "condition": {},
         "weight": 2
     }, {
-        "condition": [],
+        "condition": {},
         "weight": 2
     }, {
-        "condition": [],
+        "condition": {},
         "weight": 1
     }]
 }
