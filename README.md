@@ -10,12 +10,12 @@ Editors:
 
 # Introduction
 
-ConditionalProof is a new type of verification method for DID Documents. It can be used to express complex conditions and additional meta data about verification methods. It can be used to combine verification methods together to form conjugated conditions such as logical operations &&, thresholds, weighted thresholds, relationships and a delegation to external verification methods.
+`ConditionalProof` is a new type of verification method for DID Documents. It can be used to express complex conditions and additional metadata about verification methods. It can be used to combine verification methods to form conjugated conditions such as logical operations (like `&&`), thresholds, weighted thresholds, relationships, or delegation to external verification methods.
 
 This new type has been created from discussions during the [Decentralized Identity Foundation](https://identity.foundation)'s ID working group sessions. The need for this type has arisen from the current creation of the EOSIO DID method by [Gimly](https://gimly.io). The type is designed to cover several other important use cases requiring similar conditional logic.
 
 Prior work:
-- [Conditional Proof planning doc](https://docs.google.com/document/d/1hxEMQxfNuB6Elmd6V-9bEt0kZqSx-DULycn6CjOpMYs) - several ConditionalProof types have not been added to this draft, see conversation and if you think they are important please submit an issue or PR to add
+- [Conditional Proof planning doc](https://docs.google.com/document/d/1hxEMQxfNuB6Elmd6V-9bEt0kZqSx-DULycn6CjOpMYs) - several `ConditionalProof` types have not yet been added to this draft; see the conversation, and if you think they are important, please submit an issue or PR to add
 - [DID core - multisig and delegated use case](https://docs.google.com/presentation/d/1vrmdOnN1tiE54e8h7HyegkJUGyrBUITVFNsAVedUwTE)
 
 ## Goals
@@ -38,9 +38,9 @@ Support for account and key models of the following protocols:
 - [Antelope DID](https://github.com/Tonomy-Foundation/antelope-did)
 - [did-jwt-vc](https://github.com/Tonomy-Foundation/did-jwt-vc)
 
-# The ConditionalProof Type
+# The `ConditionalProof` Type
 
-A illistrative object of ConditionalProof type showing the potential properties of the object. Note that not all these properties would exist for this to be a valid object.
+A illustrative object of `ConditionalProof` type showing the potential properties of the object. Note that a valid object does not require existence of all of these properties.
 
 ```json
 {
@@ -59,9 +59,9 @@ A illistrative object of ConditionalProof type showing the potential properties 
 }
 ```
 
-A verificationMethod which has a "ConditionalProof2022" type is a conditional proof. A conditional proof type MUST specify one and only one fulfillment condition (And, Or, Threshold, WeightedThreshold and Delegated) by have a corresponding object property for that condition. A conditional proof MAY specify one or more relationships (Parent, Child, Sibling) by having a corresponding object property for that relationship.
+A verificationMethod which has a `ConditionalProof2022` type is a conditional proof. A conditional proof type MUST specify one and only one fulfillment condition (`And`, `Or`, `Threshold`, `WeightedThreshold`, or `Delegated`) by having a corresponding object property for that condition. A conditional proof MAY specify one or more relationships (`Parent`, `Child`, and/or `Sibling`) by having a corresponding object property for that relationship.
 
-The And, Or, Threshold and WeightedThreshold fulfillment condition MUST be either an array of verification methods, or [relative DID URL](https://w3c.github.io/did-core/#relative-did-urls) to a verification method on the same DID Document. These verification methods can be of any type, including Conditional Proof types, creating a recursive structure able to express infinite conditional logic complexity about the cryptographic material required.
+An `And`, `Or`, `Threshold`, and WeightedThreshold fulfillment condition MUST be either an array of verification methods, or a [relative DID URL](https://w3c.github.io/did-core/#relative-did-urls) to a verification method on the same DID Document. These verification methods can be of any type, including Conditional Proof types, creating a recursive structure able to express an infinite range of conditional logic complexity as may be required for the cryptographic material.
 
 The Delegated fulfillment condition MUST be a DID URL string.
 
