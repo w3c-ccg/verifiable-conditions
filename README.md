@@ -15,7 +15,7 @@ Editors:
 
 `ConditionalProof` is a new type of verification method for DID Documents. It can be used to express complex conditions and additional metadata about verification methods. It can be used to combine verification methods to form conjugated conditions such as logical operations (like `&&`), thresholds, weighted thresholds, relationships, or delegation to external verification methods.
 
-This new type has been created from discussions during the [Decentralized Identity Foundation](https://identity.foundation)'s ID working group sessions. The need for this type has arisen from the creation of the [Antelope DID method](https://github.com/Tonomy-Foundation/antelope-did-spec) (formerly "EOSIO DID method") by [Gimly](https://gimly.io) and the [Tonomy Foundation](https://tonomy.foundation). The type is designed to cover several other important use cases requiring similar conditional logic.
+This new type has been created from discussions during the [Decentralized Identity Foundation](https://identity.foundation)'s ID working group sessions. The need for this type has arisen from the creation of the [Antelope DID method](https://github.com/Tonomy-Foundation/antelope-did-spec) (formerly "EOSIO DID method") by [Gimly](https://gimly.io). The type is designed to cover several other important use cases requiring similar conditional logic.
 
 Prior work:
 
